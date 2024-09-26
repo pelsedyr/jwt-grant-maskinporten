@@ -36,7 +36,7 @@ signature=$(echo -n "$header.$payload" | openssl dgst -sha256 -sign key.pem | op
 
 jwt="$header.$payload.$signature"
 
-echo "JWT: $jwt"
+printf "JWT Grant\n---------------------\n%s\n---------------------\n" "$jwt"
 
 if [ -z "$jwt" ]; then
     echo "JWT creation failed"
@@ -46,7 +46,7 @@ fi
 response=$(curl -s -X POST -H "Content-Type: application/x-www-form-urlencoded" -d "grant_type=urn:ietf:params:oauth:grant-type:jwt-bearer&assertion=$jwt" "$TOKEN_ENDPOINT")
 access_token=$(echo "$response" | jq -r '.access_token')
 
-echo "Response: $response"
-echo "Access token: $access_token"
+printf "\nresponse:%s\n" "$(echo "$response" | jq .)"
+printf "\nAccess token\n---------------------\n%s\n---------------------\n" "$access_token"
 
 rm cert.pem key.pem
