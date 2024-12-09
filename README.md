@@ -7,3 +7,8 @@ Inspired by: https://github.com/felleslosninger/jwt-grant-generator
 2. `$ cp config.example.cfg config.cfg`, then add all auth details 
 3. `$ chmod +x create-grant.sh`
 4. `$ ./create-grant.sh`
+
+## Dependencies
+- https://github.com/jqlang/jq
+- https://github.com/openssl/openssl
+- Virksomhetssertifikat converted to p12
